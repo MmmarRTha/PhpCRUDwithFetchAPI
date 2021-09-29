@@ -1,10 +1,10 @@
-const formUser = document.querySelector('#user');
+const formUser = document.querySelector('#createForm');
 
-formUser.addEventListener('submit', (e) =>{
+formUser.addEventListener('submit', (e) => {
     e.preventDefault();
-    const dataForm = new FormData(document.getElementById('user'));
-    var name = dataForm.get('name');
-    var url = './app/models/User.php';
+    const dataForm = new FormData(document.getElementById('createForm'));
+    let nombre = dataForm.get('name');
+    let url = '././app/models/User.php';
     fetch(url,{
         method: 'post',
         body: dataForm
@@ -16,4 +16,4 @@ formUser.addEventListener('submit', (e) =>{
         .catch(function (error){
             console.log('error',error);
         });
-});
+    });

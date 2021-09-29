@@ -7,7 +7,7 @@ require_once 'app/core/templates/header.php';
     <h1 class="titulo h1">PHP CRUD WITH FETCH API</h1>
 </div>
 <div class="bg-aqua contenedor sombra form">
-    <form id="user" action="">
+    <form id="createForm" action="">
         <legend>Alta de usuarios <span>Todos los datos son obligatorios</span>
         </legend>
 <!--        formulario-->
@@ -17,7 +17,7 @@ require_once 'app/core/templates/header.php';
                 <input type="text" id="name" name="name" placeholder="Nombre">
             </div>
             <div class="field send">
-                <input type="hidden" name="action" value="create">
+                <input type="text" name="action_type" value="create" hidden="true">
                 <input type="submit" value="Agregar">
             </div>
     </form>
@@ -39,7 +39,7 @@ require_once 'app/core/templates/header.php';
                 </thead>
                 <tbody>
                 <?php $sentence = new  UserController();
-                $showData = $sentence->fetchAll();
+                $showData = $sentence->getUsers();
                 foreach ($showData as $row) { ?>
                     <tr>
                         <td><?= $row->name; ?></td>

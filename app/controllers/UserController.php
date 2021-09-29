@@ -1,21 +1,20 @@
 <?php
-echo 'UserCon';
-require_once 'app/core/Database.php';
+include 'app/core/Database.php';
 class UserController extends Database
 {
-    public function fetchAll()
+    public function getUsers()
     {
-        $query = Database::conn()->prepare("SELECT * FROM user");
+        $query = Database::connect()->prepare("SELECT * FROM user");
         $query->execute();
         return $array = $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function createUser($name)
     {
-        $sql = Database::conn()->prepare("INSERT INTO user(name) VALUES ('$name')");
+        $sql = Database::connect()->prepare("INSERT INTO user(name) VALUES ('$name')");
         if($sql->execute())
         {
-            $result = self::fetchAll();
+            $result = self::getUsers();
             return $result;
         }
     }

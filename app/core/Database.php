@@ -1,12 +1,17 @@
 <?php
-require_once 'app/core/config.php';
-echo 'database';
+require_once 'config.php';
 
 class Database
 {
-    protected function conn()
+    public function connect()
     {
-        $conn = new PDO("mysql:host=".HOST. ";dbname=".DB,USER,PASS);
-        return $conn;
+        $this->conn = null;
+        try {
+            $this->conn = new PDO("mysql:host=".HOST. ";dbname=".DB,USER,PASS);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch (PDOException $e){
+            echo 'Connection Error: ' . $e->getMessage();
+        }
+        return $this->conn;
     }
 }
